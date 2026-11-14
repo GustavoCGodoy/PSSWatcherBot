@@ -2,11 +2,15 @@ name: Monitor concursos FGV
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # a cada 30 minutos (pode atrasar um pouco)
-  workflow_dispatch:          # permite rodar manualmente
+    - cron: "*/5 * * * *"   # "tique" a cada 5 min: lê comandos e decide se verifica
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: monitor
+  cancel-in-progress: false
 
 jobs:
   check:
